@@ -45,7 +45,7 @@ storiesOf('DataTable', module)
       `
     })
   })
-  .add('with search form', () => {
+  .add('search local', () => {
     return ({
       components: { VipDataTable },
       data () {

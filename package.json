@@ -14,6 +14,7 @@
     "build": "node build/build.js",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "storybook:build": "build-storybook -c .storybook -o .out",
+    "storybook:deploy": "push-dir --dir=.out --branch=gh-pages --cleanup",
     "clean": "rimraf dist && rimraf .out"
   },
   "dependencies": {
@@ -87,6 +88,7 @@
     "postcss-import": "^11.0.0",
     "postcss-loader": "^2.0.8",
     "postcss-url": "^7.2.1",
+    "push-dir": "^0.4.1",
     "rimraf": "^2.6.0",
     "sass-loader": "^7.0.1",
     "selenium-server": "^3.0.1",

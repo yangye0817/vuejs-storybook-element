@@ -1,5 +1,8 @@
 # vuejs-storybook-element
 
+## Storybook Static Site
+https://gloriajun.github.io/vuejs-storybook-element/
+
 ## Build Setup
 
 ``` bash
