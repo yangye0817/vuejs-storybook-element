@@ -8,6 +8,7 @@ import {
 } from './index'
 import * as data from '../../mock/sample'
 import moment from 'moment'
+import axios from 'axios'
 
 const columns = [
   { type: 'selection' },
@@ -45,7 +46,7 @@ storiesOf('DataTable', module)
       `
     })
   })
-  .add('search local', () => {
+  .add('with search(local)', () => {
     return ({
       components: { VipDataTable },
       data () {
@@ -69,5 +70,47 @@ storiesOf('DataTable', module)
   :style="{width: '990px'}">
 </vip-data-table>
       `
+    })
+  })
+  .add('with search(server)', () => {
+    return ({
+      components: { VipDataTable },
+      data () {
+        return {
+          formOptions: {
+            formItems: [
+              { prop: 'title', label: 'Title', placeholder: 'Input Title' }
+            ]
+          },
+          columns: [
+            { prop: 'id', label: 'Id', width: '50px' },
+            { prop: 'title', label: 'Title' },
+            { prop: 'userId', label: 'userId', width: '100px' }
+          ],
+          loading: false,
+          data: []
+        }
+      },
+      template: `
+<vip-data-table
+  :form-options="formOptions"
+  :loading="loading"
+  :columns="columns"
+  :data="data"
+  :style="{width: '900px'}">
+</vip-data-table>
+      `,
+      mounted () {
+        this.getList()
+      },
+      methods: {
+        async getList () {
+          let res = await axios({
+            method: 'get',
+            url: 'https://jsonplaceholder.typicode.com/posts'
+          })
+          this.data = res.data
+        }
+      }
     })
   })
