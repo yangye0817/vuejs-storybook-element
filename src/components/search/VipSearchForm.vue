@@ -5,7 +5,8 @@
     :inline="inline"
     :label-width="labelWidth ? (labelWidth + 'px') : ''"
     size="small"
-    class="vip-search-form">
+    class="vip-search-form"
+    @submit.native.prevent="search">
 
     <el-form-item
       v-for="(item, index) in formItems"
