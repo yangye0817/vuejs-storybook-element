@@ -1,5 +1,5 @@
 /**
- * locale for common
+ * locale for components
  */
 export default {
   button: {

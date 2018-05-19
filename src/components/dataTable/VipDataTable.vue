@@ -22,12 +22,19 @@
 
       <template v-for="(col, index) in columns">
         <el-table-column
-          v-if="col.render"
+          v-if="col.render || col.slotName"
           :key="index"
           :label="col.label"
           :width="col.width">
           <template slot-scope="scope">
-            <span v-html="col.render(scope.row)"></span>
+            <span
+              v-if="col.render"
+              v-html="col.render(scope.row)"></span>
+            <span v-else>
+              <slot
+                :name="col.slotName"
+                :row="scope.row"></slot>
+            </span>
           </template>
         </el-table-column>
         <el-table-column
@@ -59,7 +66,7 @@
 </template>
 
 <script>
-import VipSearchForm from '../search/VipSearchForm'
+import VipSearchForm from '../form/VipSearchForm'
 
 export default {
   name: 'VipDataTable',
@@ -180,16 +187,16 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-.pagination {
-  margin-top: 1rem;
-  text-align: right;
-}
+  .pagination {
+    margin-top: 1rem;
+    text-align: right;
+  }
 </style>
 
 <style rel="stylesheet/scss" lang="scss">
-.vip-data-table {
-  .el-table__header tr th {
-    background-color: #f5f7fa;
+  .vip-data-table {
+    .el-table__header tr th {
+      background-color: #f5f7fa;
+    }
   }
-}
 </style>

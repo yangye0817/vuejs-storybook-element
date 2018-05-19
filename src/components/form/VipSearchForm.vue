@@ -5,8 +5,7 @@
     :inline="inline"
     :label-width="labelWidth ? (labelWidth + 'px') : ''"
     size="small"
-    class="vip-search-form"
-    @submit.native.prevent="search">
+    class="vip-search-form">
 
     <el-form-item
       v-for="(item, index) in formItems"
@@ -20,34 +19,53 @@
         :placeholder="item.placeholder"
         :style="{width: (item.width ? `${item.width}px` : '') }"
         @keyup.enter.native="search"></el-input>
-      <!-- checkbox -->
+
+      <!-- checkbox : TODO 차후 다시 테스트해서 코드 보완 필요 -->
       <el-checkbox-group
         v-if="item.itemType === 'checkbox'"
-        v-model="params[item.prop]">
+        v-model="params[item.prop]"
+        :placeholder="item.placeholder">
         <el-checkbox
           v-for="(option, index) in item.options"
           :key="index"
-          :label="option.lable"></el-checkbox>
+          :label="option.label"></el-checkbox>
       </el-checkbox-group>
+
+      <!-- select -->
+      <el-select
+        v-else-if="item.itemType === 'select'"
+        v-model="params[item.prop]"
+        :placeholder="item.placeholder"
+        :style="{width: (item.width ? `${item.width}px` : '') }"
+        clearable>
+        <el-option
+          v-for="(option, index) in item.options"
+          :key="index"
+          :label="option.label"
+          :value="option.value"></el-option>
+      </el-select>
+
       <!-- date -->
       <el-date-picker
         v-else-if="item.itemType === 'datetimerange'"
         v-model="params[item.prop]"
+        :style="{width: (item.width ? `${item.width}px` : '') }"
         type="datetimerange"
         start-placeholder="Start Date"
         end-placeholder="End Date"></el-date-picker>
+
     </el-form-item>
 
     <el-form-item class="btn-group">
       <el-button
         type="primary"
-        size="small"
+        size="mini"
         @click="search"><vip-icon icon-name="search"></vip-icon>
         {{ submitBtnText }}</el-button>
       <el-button
         v-if="showResetBtn"
         type="info"
-        size="small"
+        size="mini"
         @click="reset"><vip-icon icon-name="undo"></vip-icon>
         {{ resetBtnText }}</el-button>
     </el-form-item>
