@@ -62,7 +62,8 @@
       label="Nationality"
       prop="nationality">
       <el-select
-        v-model="form.nationality">
+        v-model="form.nationality"
+        clearable>
         <el-option
           label="KR"
           value="kr"></el-option>
@@ -73,6 +74,15 @@
           label="JP"
           value="jp"></el-option>
       </el-select>
+    </el-form-item>
+
+    <el-form-item class="btn-group">
+      <el-button
+        type="primary"
+        size="mini">Save</el-button>
+      <el-button
+        type="info"
+        size="mini">Cancel</el-button>
     </el-form-item>
 
   </el-form>
